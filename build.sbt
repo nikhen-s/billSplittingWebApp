@@ -13,6 +13,9 @@ lazy val ticTacToeJVM = project in file("./apps/ticTacToe")
 lazy val memoryJS = project in file("./apps/memory")
 lazy val memoryJVM = project in file("./apps/memory")
 
+lazy val billSplittingJS = project in file("./apps/billSplitting")
+lazy val billSplittingJVM = project in file("./apps/billSplitting")
+
 /// Tests
 
 lazy val driver = (crossProject(JVMPlatform, JSPlatform) in file("./driver"))
@@ -49,14 +52,14 @@ lazy val driver = (crossProject(JVMPlatform, JSPlatform) in file("./driver"))
     )
   )
 
-lazy val driverJS = driver.js.dependsOn(ticTacToeJS, memoryJS)
-lazy val driverJVM = driver.jvm.dependsOn(ticTacToeJVM, memoryJVM)
+lazy val driverJS = driver.js.dependsOn(ticTacToeJS, memoryJS, billSplittingJS)
+lazy val driverJVM = driver.jvm.dependsOn(ticTacToeJVM, memoryJVM, billSplittingJVM)
 
 /// Aggregate project
 
 lazy val webapp = (project in file("."))
   .aggregate(
-    ticTacToeJS, ticTacToeJVM, memoryJS, memoryJVM, driverJS, driverJVM
+    ticTacToeJS, ticTacToeJVM, memoryJS, memoryJVM, billSplittingJS, billSplittingJVM, driverJS, driverJVM
   ).settings(
     name := "webapp",
     scalaVersion := "3.3.1",
